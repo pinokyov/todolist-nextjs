@@ -12,7 +12,6 @@ import {
   ADD_TODO,
   REMOVE_TODO,
   TOGGLE_TODO,
-  UPDATE_TODO
 } from "../actions/actionsTypes";
 
 const TodoReducer = (state = INITIAL_DATA, action) => {
@@ -37,11 +36,6 @@ const TodoReducer = (state = INITIAL_DATA, action) => {
 
     case REMOVE_TODO:
       return state.filter(todo => todo.id !== numIndex);
-
-    case UPDATE_TODO:
-      return state.map(todo =>
-        todo.id === numIndex ? { ...todo, text: action.text } : todo
-      );
 
     default:
       return state;

@@ -3,7 +3,6 @@ import {
   REMOVE_TODO,
   TOGGLE_TODO,
   SET_VISIBILITY_FILTER,
-  UPDATE_TODO
 } from "./actionsTypes";
 
 let ToDoId = 3;
@@ -22,12 +21,6 @@ export const deleteTodo = id => ({
 export const toggleTodo = id => ({
   type: TOGGLE_TODO,
   id: id
-});
-
-export const updateTodo = todo => ({
-  type: UPDATE_TODO,
-  id: todo.id,
-  text: todo.text
 });
 
 export const setVisibilityFilter = filter => ({
