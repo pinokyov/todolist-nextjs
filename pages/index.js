@@ -1,20 +1,16 @@
 import Layout from "../components/Layout";
-import CreateForm from "../components/CreateForm";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import ListLayout from "../components/ListLayout";
+import CreateModal from "../components/CreateModal";
+import Link from "next/link";
 
-const Index = () => (
-    <Layout>
-        <CreateForm/>
+const Index = () => {
 
-        <div className="px-5 pb-3 w-80">
-            <ul className="list-group">
-                <li className="list-group-item d-flex justify-content-between align-items-center">
-                    Cras justo odio
-                    <button className="btn btn-sm btn-danger badge-pill">R</button>
-                </li>
-            </ul>
-        </div>
-    </Layout>
-);
+    return(
+        <Layout>
+            <ListLayout/>
+            <CreateModal/>
+        </Layout>
+    )
+};
 
 export default Index;

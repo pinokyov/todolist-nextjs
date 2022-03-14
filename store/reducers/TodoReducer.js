@@ -2,6 +2,8 @@ const INITIAL_DATA = [
   {
     id: 0,
     text: "Example to do.",
+    description: "Example to do.",
+    created_at:new Date().getTime(),
     completed: true
   },
 ];
@@ -23,6 +25,8 @@ const TodoReducer = (state = INITIAL_DATA, action) => {
         {
           id: action.id,
           text: action.text,
+          description: action.description,
+          created_at:new Date().getTime(),
           completed: false
         }
       ];
