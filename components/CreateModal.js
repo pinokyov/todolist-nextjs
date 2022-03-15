@@ -1,7 +1,28 @@
+import {useState} from "react";
+import { useDispatch } from "react-redux";
+
+import {todoAdded} from "../redux/todosSlice";
+
 const CreateModal = () => {
+
+    const dispatch = useDispatch();
+
+    const [name,setName] = useState('')
+    const [description,setDescription] = useState('')
 
     const formOnSubmit = async (event) => {
         await event.preventDefault();
+        await dispatch(
+            todoAdded({
+                id: new Date().getTime(),
+                name:name,
+                description:description,
+                completed:false
+            })
+        );
+        await setName('');
+        await setDescription('');
+        await $('#kt_modal_1').modal('hide');
     }
 
     return (
@@ -21,12 +42,12 @@ const CreateModal = () => {
                         <form onSubmit={event => formOnSubmit(event)} id={"createForm"}>
                             <div className="mb-10">
                                 <label htmlFor="exampleFormControlInput1" className="required form-label">Title</label>
-                                <input type="text" className="form-control form-control-solid"
+                                <input value={name} onChange={event => setName(event.target.value)} type="text" className="form-control form-control-solid"
                                        placeholder="To Do Title" required={true}/>
                             </div>
                             <div className="mb-10">
-                                <label htmlFor="exampleFormControlInput1" className="form-label">Description</label>
-                                <textarea className="form-control form-control-solid"
+                                <label htmlFor="exampleFormControlInput1" className="required form-label">Description</label>
+                                <textarea required={true} value={description} onChange={event => setDescription(event.target.value)} className="form-control form-control-solid"
                                           placeholder="Description about your to do." rows={4}/>
                             </div>
                         </form>

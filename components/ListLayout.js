@@ -1,6 +1,15 @@
+import {useState,useEffect} from "react";
+import {useSelector} from "react-redux";
+
 import ListItem from "./ListItem";
 
+
 const ListLayout = () => {
+
+    const todos = useSelector((state) => {
+        return state.todos
+    });
+
     return(
         <div className="row gy-5 g-xl-8 mt-5">
             <div className="col-xl-6 offset-2">
@@ -16,35 +25,40 @@ const ListLayout = () => {
                     <div className="card-body pt-2">
                         <ul className="nav nav-tabs nav-line-tabs nav-line-tabs-2x mb-7 fs-6">
                             <li className="nav-item">
-                                <a className="nav-link active" data-bs-toggle="tab" href="#kt_tab_pane_4">Active</a>
+                                <a className="nav-link active" data-bs-toggle="tab" href="#active">Active</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_5">Completed</a>
+                                <a className="nav-link" data-bs-toggle="tab" href="#completed">Completed</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_6">All</a>
+                                <a className="nav-link" data-bs-toggle="tab" href="#all">All</a>
                             </li>
                         </ul>
 
                         <div className="tab-content" id="myTabContent">
-                            <div className="tab-pane fade show active" id="kt_tab_pane_4" role="tabpanel">
-                                <ListItem/>
-                                <ListItem/>
-                                <ListItem/>
-                                <span>Active 3 items.</span>
+                            <div className="tab-pane fade show active" id="active" role="tabpanel">
+                                {
+                                    todos ? todos.filter(i=>i.completed===false).map((todo,index) => (
+                                        <ListItem todo={todo} key={index}/>
+                                    )) : null
+                                }
+                                {todos ? <span>Active {todos.filter(i=>i.completed===false).length} items.</span> : <span>Has 0 items.</span>}
                             </div>
-                            <div className="tab-pane fade" id="kt_tab_pane_5" role="tabpanel">
-                                <ListItem/>
-                                <ListItem/>
-                                <span>Completed 2 items.</span>
+                            <div className="tab-pane fade show" id="completed" role="tabpanel">
+                                {
+                                    todos ? todos.filter(i=>i.completed===true).map((todo,index) => (
+                                        <ListItem todo={todo} key={index}/>
+                                    )) : null
+                                }
+                                {todos ? <span>Completed {todos.filter(i=>i.completed===true).length} items.</span> : <span>Has 0 items.</span>}
                             </div>
-                            <div className="tab-pane fade" id="kt_tab_pane_6" role="tabpanel">
-                                <ListItem/>
-                                <ListItem/>
-                                <ListItem/>
-                                <ListItem/>
-                                <ListItem/>
-                                <span>Total 5 items.</span>
+                            <div className="tab-pane fade show" id="all" role="tabpanel">
+                                {
+                                    todos ? todos.map((todo,index) => (
+                                        <ListItem todo={todo} key={index}/>
+                                    )) : null
+                                }
+                                {todos ? <span>All {todos.length} items.</span> : <span>Has 0 items.</span>}
                             </div>
                         </div>
                     </div>
@@ -52,5 +66,8 @@ const ListLayout = () => {
             </div>
         </div>
     )
+
+
 }
+
 export default ListLayout;

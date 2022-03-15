@@ -1,7 +1,6 @@
 import Layout from "../components/Layout";
 import ListLayout from "../components/ListLayout";
 import CreateModal from "../components/CreateModal";
-import Link from "next/link";
 
 const Index = () => {
 
