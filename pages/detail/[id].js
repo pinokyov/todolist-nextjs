@@ -1,4 +1,3 @@
-import {useEffect, useState} from "react";
 import { useRouter } from 'next/router'
 import {useSelector,useDispatch} from "react-redux";
 import {todoToggle,todoDeleted} from "../../redux/todosSlice";
@@ -29,6 +28,7 @@ function Detail (){
         }).then(async (result) => {
             if (result.value) {
                 dispatch(todoDeleted({id}))
+                router.push('/')
             }else{
                 return false;
             }
