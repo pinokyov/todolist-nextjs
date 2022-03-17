@@ -27,8 +27,8 @@ function Detail (){
             }
         }).then(async (result) => {
             if (result.value) {
-                dispatch(todoDeleted({id}))
-                router.push('/')
+                await dispatch(todoDeleted({id}))
+                await router.push('/')
             }else{
                 return false;
             }
